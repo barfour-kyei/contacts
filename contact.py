@@ -17,6 +17,13 @@ def phonenumber_does_not_have_countrycode(row,phone_column):
     return not row[phone_column].startswith("+")
 
 def phone_column_contains_digits(phone_column):
+    if phone_column.find(':::'):
+        splitted_phone_numbers = phone_column.split(':::')
+        for current_number in splitted_phone_numbers:
+            current_number = current_number.replace(" ", "")
+            current_number = current_number.replace("+", "")
+            if current_number.isdigit():
+                return current_number.isdigit()
     phone_column = phone_column.replace(" ", "")
     phone_column = phone_column.replace("+", "")
     return phone_column.isdigit()

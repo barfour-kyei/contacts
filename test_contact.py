@@ -11,4 +11,4 @@ def test_phone_value_contains_digits():
     assert contact.phone_column_contains_digits('024 422 0425') == True
     assert contact.phone_column_contains_digits('+233 53 011 8669') == True
     assert contact.phone_column_contains_digits('024 422 0425 ::: 0243433467') == True
-
+    assert contact.phone_column_contains_digits('0245021422 ::: +974 7054 7928') == True
