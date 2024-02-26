@@ -6,15 +6,15 @@ GHANA_MOBILE_PHONE_LENGTH = 10
 GERMANY_MOBILE_PHONE_LENGTH = 12
 
 
-def phonenumber_does_not_have_countrycode(row,phone_column):
-    print('value is digits',phone_column_contains_digits(row[phone_column]))
-    if row[phone_column].find(':::'):
-        split_phone_numbers = row[phone_column].split(':::')
+def phonenumber_does_not_have_countrycode(phone_column):
+    print('value is digits',phone_column_contains_digits(phone_column))
+    if phone_column.find(':::'):
+        split_phone_numbers = phone_column.split(':::')
         for current_number in split_phone_numbers:
             if not current_number.startswith("+"):
                 return True
 
-    return not row[phone_column].startswith("+")
+    return not phone_column.startswith("+")
 
 def phone_column_contains_digits(phone_column):
     if phone_column.find(':::'):
@@ -28,19 +28,18 @@ def phone_column_contains_digits(phone_column):
     phone_column = phone_column.replace("+", "")
     return phone_column.isdigit()
 
-def modify_phone_number(row):
-    original_number = row[34]
-    print("original number is: " + original_number)
+def modify_phone_number(phone_column):
+    print("original number is: " + phone_column)
 
     # remove all white spaces from number
-    original_number = original_number.replace(" ", "")
+    phone_column = phone_column.replace(" ", "")
 
-    if len(str(original_number)) == GHANA_MOBILE_PHONE_LENGTH:
-        modified_number = original_number[1:]
+    if len(str(phone_column)) == GHANA_MOBILE_PHONE_LENGTH:
+        modified_number = phone_column[1:]
         modified_number = '+233' + modified_number
         print("modified number is: " + modified_number)
-        row[34] = modified_number
-    return row
+        phone_column = modified_number
+    return phone_column
 
 
 def read_csv(CONTACTS___CSV):
