@@ -22,4 +22,4 @@ def test_phonenumber_does_not_have_countrycode():
 def test_modify_phone_number():
     assert contact.modify_phone_number('024 422 0425') == '+233244220425'
     assert contact.modify_phone_number('+233 53 011 8669') == '+233530118669'
-    # assert contact.modify_phone_number('024 422 0425 ::: 0243433467') == '+233244220425 ::: +233243433467'
+    assert contact.modify_phone_number('024 422 0112 ::: 024 343 0113') == '+233244220112:::+233243430113'
