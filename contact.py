@@ -5,17 +5,6 @@ CONTACTS___CSV = 'contacts_1.csv'
 GHANA_MOBILE_PHONE_LENGTH = 10
 GERMANY_MOBILE_PHONE_LENGTH = 12
 
-
-def phonenumber_does_not_have_countrycode(phone_column):
-    print('value is digits',phone_column_contains_digits(phone_column))
-    if phone_column.find(':::'):
-        split_phone_numbers = phone_column.split(':::')
-        for current_number in split_phone_numbers:
-            if not current_number.startswith("+"):
-                return True
-
-    return not phone_column.startswith("+")
-
 def phone_column_contains_digits(phone_column):
     if phone_column.find(':::'):
         splitted_phone_numbers = phone_column.split(':::')
@@ -27,6 +16,16 @@ def phone_column_contains_digits(phone_column):
     phone_column = phone_column.replace(" ", "")
     phone_column = phone_column.replace("+", "")
     return phone_column.isdigit()
+
+def phonenumber_does_not_have_countrycode(phone_column):
+    # print('value is digits',phone_column_contains_digits(phone_column))
+    if phone_column.find(':::'):
+        split_phone_numbers = phone_column.split(':::')
+        for current_number in split_phone_numbers:
+            if not current_number.startswith("+"):
+                return True
+
+    return not phone_column.startswith("+")
 
 def modify_phone_number(phone_column):
     print("original number is: " + phone_column)
@@ -85,6 +84,25 @@ def read_csv(CONTACTS___CSV):
 
 def main():
     csv_content = read_csv(CONTACTS___CSV)
-    print("csv content: ", csv_content)
+    _current_row = csv_content[3]
+    _current_phone_column = csv_content[3][34]
+    print("current row: ", _current_row)
+    print("current phone column: ", _current_phone_column)
+
+    _process_row = phone_column_contains_digits(_current_phone_column)
+    print("\nprocess current row: ", _process_row)
+
+    if _process_row:
+        _process_phone_column = phonenumber_does_not_have_countrycode(_current_phone_column)
+        print("\nmodify phone value: ", _process_phone_column)
+        if _process_phone_column:
+            _internationalized_phone = modify_phone_number(_current_phone_column)
+            print("new phone number", _internationalized_phone)
+        else:
+            print("skip phone number modification")
+    else:
+        print("current row is being skipped")
+    # for index, row in enumerate(csv_content):
+    # print("current index: ", index)
 
 main()
